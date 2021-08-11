@@ -1,13 +1,23 @@
 import hashlib
+import random
 
-password = 'asscrackerandtitsbolisk'.encode()
+### basic hashing ###
+def shuffle(word):
 
-print(password)
+   Lword= list(word)
 
-print('password before hashing')
+   random.shuffle(Lword)
 
-time.sleep(4)
+   password= ''.join(Lword)
 
-print(hashlib.blake2b(password).hexdigest())
+   print(password)
 
-print('password after hashing')
+
+def hashed(word):
+
+    eword = word.encode()
+
+    hashedWord =hashlib.blake2b(eword).hexdigest()
+
+    print(hashedWord)
+

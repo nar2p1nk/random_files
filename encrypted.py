@@ -1,15 +1,51 @@
 from cryptography.fernet import Fernet
 
-password = 'asscrackerandtitsbolisk'
+import time
 
-key = Fernet.generate_key()
+password = input('enter password: ')
 
-fkey = Fernet(key)
+### symetrical encryption ###
 
-encryptedPassword = fkey.encrypt(password.encode())
+### generate key
+def syncEncrypt(t):
 
-print('uncrypted password: ',password)
-time.sleep(5)
-print('encrypted password: ',encryptedPassword)
-time.sleep(5)
-print('decrypted password: ', fkey.decrypt(encryptedPassword).decode())
+
+    key = Fernet.generate_key()
+
+    fkey = Fernet(key)
+### encryption
+    encryptedPassword = fkey.encrypt(t.encode())
+
+    print('uncrypted password:',password)
+    time.sleep(5)
+    print('encrypted password:',encryptedPassword)
+    time.sleep(5)
+
+### decryption ###
+    decryptedPassword =fkey.decrypt(encryptedPassword).decode()
+    print('decrypted password:',decryptedPassword)
+
+
+### asymetrical encrytioon
+
+import rsa
+
+def asyncEncrypt(t):
+    publicKey, privateKey = rsa.newkeys(512)
+
+    encrypt = rsa.encrypt(t.encode(),publicKey)
+
+    print('uncrypted password:',t)
+    time.sleep(4)
+    print('encrypted password:', encrypt)
+
+
+### decryption ###
+    decrypt = rsa.decrypt(encrypt,privateKey).decode()
+
+    time.sleep(4)
+
+    print('decrypted password:',decrypt)
+
+
+
